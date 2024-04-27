@@ -1,13 +1,15 @@
 import { Image, ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import { Feather } from '@expo/vector-icons'
 import { colors } from "@/styles/colors";
+import QRCode from "@/components/qrcode";
 
 type CredentialProps = {
     image?: string
-    onChangeAvatar?: () => void
+    onChangeAvatar?: () => void,
+    onShowQRCode?: () => void
 }
 
-export default function Credential({ onChangeAvatar, image }: CredentialProps){
+export default function Credential({ onChangeAvatar,onShowQRCode, image }: CredentialProps){
     return(
         <View className="w-full self-stretch items-center">
             <Image 
@@ -51,12 +53,9 @@ export default function Credential({ onChangeAvatar, image }: CredentialProps){
                     calebe@email.com
                 </Text>
 
-                <Image 
-                    source={require('@/assets/ticket/qrcode.png')}
-                    className="w-32 h-32"
-                />
+                <QRCode value="teste" size={120}/>
 
-                <TouchableOpacity activeOpacity={0.7} style={{ marginTop: 24 }}>
+                <TouchableOpacity onPress={onShowQRCode} activeOpacity={0.7} style={{ marginTop: 24 }}>
                     <Text className="font-body text-orange-500 text-sm ">Ampliar QRCode</Text>
                 </TouchableOpacity>
             </View>
